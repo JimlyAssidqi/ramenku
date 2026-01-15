@@ -13,7 +13,7 @@ const Navbar: React.FC = () => {
 
   const navLinks = [
     { path: '/', label: 'Menu', icon: Soup },
-    { path: '/history', label: 'Orders', icon: History },
+    { path: '/history', label: 'Pesanan', icon: History },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
             <div className="w-10 h-10 rounded-full gradient-warm flex items-center justify-center shadow-warm transition-transform group-hover:scale-105">
               <Soup className="w-5 h-5 text-primary-foreground" />
             </div>
-            <span className="text-xl font-bold text-gradient-warm">Ramen House</span>
+            <span className="text-xl font-bold text-gradient-warm">Rumah Ramen</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -54,7 +54,7 @@ const Navbar: React.FC = () => {
               <Link to="/payment">
                 <Button variant="cream" size="sm" className="relative">
                   <ShoppingBag className="w-4 h-4" />
-                  <span className="ml-1">Cart</span>
+                  <span className="ml-1">Keranjang</span>
                   <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full gradient-warm text-primary-foreground text-xs flex items-center justify-center">
                     {cartItems.length}
                   </span>
@@ -69,13 +69,13 @@ const Navbar: React.FC = () => {
                   <span className="text-sm font-medium">{user?.name}</span>
                 </div>
                 <Button variant="ghost" size="sm" onClick={logout}>
-                  Logout
+                  Keluar
                 </Button>
               </div>
             ) : (
               <Link to="/auth">
                 <Button variant="warm" size="sm">
-                  Login
+                  Masuk
                 </Button>
               </Link>
             )}
@@ -117,7 +117,7 @@ const Navbar: React.FC = () => {
                   className="flex items-center gap-2 px-4 py-3 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted"
                 >
                   <ShoppingBag className="w-4 h-4" />
-                  Cart ({cartItems.length})
+                  Keranjang ({cartItems.length})
                 </Link>
               )}
 
@@ -135,7 +135,7 @@ const Navbar: React.FC = () => {
                       }}
                       className="w-full text-left px-4 py-3 text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
                     >
-                      Logout
+                      Keluar
                     </button>
                   </>
                 ) : (
@@ -144,7 +144,7 @@ const Navbar: React.FC = () => {
                     onClick={() => setMobileMenuOpen(false)}
                     className="block px-4 py-3 text-primary font-medium hover:bg-primary/10 rounded-lg transition-colors"
                   >
-                    Login / Register
+                    Masuk / Daftar
                   </Link>
                 )}
               </div>

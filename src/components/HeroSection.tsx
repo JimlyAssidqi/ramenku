@@ -23,19 +23,19 @@ const HeroSection: React.FC = () => {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
               <Star className="w-4 h-4 text-accent fill-accent" />
-              <span className="text-sm font-medium text-primary">Authentic Japanese Ramen</span>
+              <span className="text-sm font-medium text-primary">Ramen Jepang Autentik</span>
             </div>
 
             {/* Main Heading */}
             <div className="space-y-4">
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                <span className="text-foreground">Taste the</span>
+                <span className="text-foreground">Rasakan</span>
                 <br />
-                <span className="text-gradient-warm">Tradition</span>
+                <span className="text-gradient-warm">Tradisi</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground max-w-lg leading-relaxed">
-                Experience handcrafted ramen with rich, simmering broths and premium ingredients. 
-                Made fresh daily, delivered to your door.
+                Nikmati ramen buatan tangan dengan kuah kaya yang mendidih dan bahan-bahan premium. 
+                Dibuat segar setiap hari, diantar ke rumah Anda.
               </p>
             </div>
 
@@ -48,13 +48,13 @@ const HeroSection: React.FC = () => {
                 className="group"
               >
                 <Soup className="w-5 h-5 mr-2 group-hover:animate-pulse" />
-                Explore Menu
+                Lihat Menu
               </Button>
               <Button 
                 variant="outline" 
                 size="xl"
               >
-                Our Story
+                Cerita Kami
               </Button>
             </div>
 
@@ -62,15 +62,15 @@ const HeroSection: React.FC = () => {
             <div className="flex gap-8 pt-4">
               <div className="text-center">
                 <div className="text-3xl font-bold text-gradient-warm">15+</div>
-                <div className="text-sm text-muted-foreground">Ramen Varieties</div>
+                <div className="text-sm text-muted-foreground">Variasi Ramen</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-gradient-warm">4.9</div>
-                <div className="text-sm text-muted-foreground">Customer Rating</div>
+                <div className="text-sm text-muted-foreground">Rating Pelanggan</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-gradient-warm">30min</div>
-                <div className="text-sm text-muted-foreground">Avg. Delivery</div>
+                <div className="text-3xl font-bold text-gradient-warm">30mnt</div>
+                <div className="text-sm text-muted-foreground">Rata-rata Pengiriman</div>
               </div>
             </div>
           </div>
@@ -85,7 +85,7 @@ const HeroSection: React.FC = () => {
               <div className="relative rounded-full overflow-hidden border-4 border-ramen-cream shadow-elevated animate-float">
                 <img
                   src="/hero-ramen.jpg"
-                  alt="Delicious Ramen Bowl"
+                  alt="Semangkuk Ramen Lezat"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -97,7 +97,7 @@ const HeroSection: React.FC = () => {
                     <Star className="w-4 h-4 text-ramen-dark fill-ramen-dark" />
                   </div>
                   <div>
-                    <div className="text-sm font-bold">Best Seller</div>
+                    <div className="text-sm font-bold">Terlaris</div>
                     <div className="text-xs text-muted-foreground">Tonkotsu</div>
                   </div>
                 </div>
@@ -111,8 +111,8 @@ const HeroSection: React.FC = () => {
                     ))}
                   </div>
                   <div className="text-xs">
-                    <span className="font-bold">2.5k+</span>
-                    <span className="text-muted-foreground"> happy customers</span>
+                    <span className="font-bold">2.5rb+</span>
+                    <span className="text-muted-foreground"> pelanggan puas</span>
                   </div>
                 </div>
               </div>
@@ -126,7 +126,7 @@ const HeroSection: React.FC = () => {
         onClick={scrollToMenu}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
       >
-        <span className="text-sm">Scroll to explore</span>
+        <span className="text-sm">Scroll untuk eksplorasi</span>
         <ChevronDown className="w-5 h-5 animate-bounce" />
       </button>
     </section>

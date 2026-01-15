@@ -10,14 +10,14 @@ import { Link } from 'react-router-dom';
 import { z } from 'zod';
 
 const loginSchema = z.object({
-  email: z.string().email('Please enter a valid email'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
+  email: z.string().email('Masukkan email yang valid'),
+  password: z.string().min(6, 'Kata sandi minimal 6 karakter'),
 });
 
 const registerSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Please enter a valid email'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
+  name: z.string().min(2, 'Nama minimal 2 karakter'),
+  email: z.string().email('Masukkan email yang valid'),
+  password: z.string().min(6, 'Kata sandi minimal 6 karakter'),
 });
 
 const Auth: React.FC = () => {
@@ -59,14 +59,14 @@ const Auth: React.FC = () => {
         const success = await login(formData.email, formData.password);
         if (success) {
           toast({
-            title: 'Welcome back!',
-            description: 'You have successfully logged in.',
+            title: 'Selamat datang kembali!',
+            description: 'Anda berhasil masuk.',
           });
           navigate(from, { replace: true });
         } else {
           toast({
-            title: 'Login failed',
-            description: 'Please check your credentials and try again.',
+            title: 'Gagal masuk',
+            description: 'Periksa kredensial Anda dan coba lagi.',
             variant: 'destructive',
           });
         }
@@ -85,22 +85,22 @@ const Auth: React.FC = () => {
         const success = await register(formData.name, formData.email, formData.password);
         if (success) {
           toast({
-            title: 'Account created!',
-            description: 'Welcome to Ramen House.',
+            title: 'Akun berhasil dibuat!',
+            description: 'Selamat datang di Rumah Ramen.',
           });
           navigate(from, { replace: true });
         } else {
           toast({
-            title: 'Registration failed',
-            description: 'Please try again with different credentials.',
+            title: 'Pendaftaran gagal',
+            description: 'Silakan coba lagi dengan kredensial yang berbeda.',
             variant: 'destructive',
           });
         }
       }
     } catch {
       toast({
-        title: 'Error',
-        description: 'Something went wrong. Please try again.',
+        title: 'Kesalahan',
+        description: 'Terjadi kesalahan. Silakan coba lagi.',
         variant: 'destructive',
       });
     } finally {
@@ -116,7 +116,7 @@ const Auth: React.FC = () => {
           {/* Back Button */}
           <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8">
             <ArrowLeft className="w-4 h-4" />
-            Back to Menu
+            Kembali ke Menu
           </Link>
 
           {/* Header */}
@@ -125,15 +125,15 @@ const Auth: React.FC = () => {
               <div className="w-12 h-12 rounded-full gradient-warm flex items-center justify-center shadow-warm">
                 <Soup className="w-6 h-6 text-primary-foreground" />
               </div>
-              <span className="text-2xl font-bold text-gradient-warm">Ramen House</span>
+              <span className="text-2xl font-bold text-gradient-warm">Rumah Ramen</span>
             </div>
             <h1 className="text-3xl font-bold text-foreground mb-2">
-              {isLogin ? 'Welcome back' : 'Create account'}
+              {isLogin ? 'Selamat datang kembali' : 'Buat akun'}
             </h1>
             <p className="text-muted-foreground">
               {isLogin 
-                ? 'Enter your credentials to access your account' 
-                : 'Join us and start ordering delicious ramen'}
+                ? 'Masukkan kredensial Anda untuk mengakses akun' 
+                : 'Bergabunglah dan mulai pesan ramen lezat'}
             </p>
           </div>
 
@@ -142,14 +142,14 @@ const Auth: React.FC = () => {
             {!isLogin && (
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-sm font-medium">
-                  Full Name
+                  Nama Lengkap
                 </Label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                   <Input
                     id="name"
                     type="text"
-                    placeholder="Your name"
+                    placeholder="Nama Anda"
                     className="pl-10 h-12"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -161,14 +161,14 @@ const Auth: React.FC = () => {
 
             <div className="space-y-2">
               <Label htmlFor="email" className="text-sm font-medium">
-                Email Address
+                Alamat Email
               </Label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <Input
                   id="email"
                   type="email"
-                  placeholder="you@example.com"
+                  placeholder="anda@contoh.com"
                   className="pl-10 h-12"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -179,7 +179,7 @@ const Auth: React.FC = () => {
 
             <div className="space-y-2">
               <Label htmlFor="password" className="text-sm font-medium">
-                Password
+                Kata Sandi
               </Label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
@@ -209,14 +209,14 @@ const Auth: React.FC = () => {
               className="w-full"
               disabled={isLoading}
             >
-              {isLoading ? 'Please wait...' : isLogin ? 'Sign In' : 'Create Account'}
+              {isLoading ? 'Mohon tunggu...' : isLogin ? 'Masuk' : 'Buat Akun'}
             </Button>
           </form>
 
           {/* Toggle */}
           <div className="mt-6 text-center">
             <p className="text-muted-foreground">
-              {isLogin ? "Don't have an account?" : 'Already have an account?'}
+              {isLogin ? 'Belum punya akun?' : 'Sudah punya akun?'}
               <button
                 type="button"
                 onClick={() => {
@@ -225,7 +225,7 @@ const Auth: React.FC = () => {
                 }}
                 className="ml-2 text-primary hover:underline font-medium"
               >
-                {isLogin ? 'Sign Up' : 'Sign In'}
+                {isLogin ? 'Daftar' : 'Masuk'}
               </button>
             </p>
           </div>
@@ -242,9 +242,9 @@ const Auth: React.FC = () => {
           <div className="w-24 h-24 rounded-full bg-primary-foreground/20 backdrop-blur-lg flex items-center justify-center mx-auto mb-8">
             <Soup className="w-12 h-12" />
           </div>
-          <h2 className="text-4xl font-bold mb-4">Delicious Awaits</h2>
+          <h2 className="text-4xl font-bold mb-4">Kelezatan Menanti</h2>
           <p className="text-lg text-primary-foreground/80 max-w-sm">
-            Join thousands of ramen lovers and experience authentic Japanese flavors delivered to your doorstep.
+            Bergabunglah dengan ribuan pecinta ramen dan nikmati cita rasa Jepang autentik yang diantar ke rumah Anda.
           </p>
         </div>
       </div>

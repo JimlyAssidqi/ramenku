@@ -8,6 +8,15 @@ interface RamenCardProps {
   ramen: RamenItem;
 }
 
+const formatRupiah = (amount: number) => {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amount);
+};
+
 const RamenCard: React.FC<RamenCardProps> = ({ ramen }) => {
   const navigate = useNavigate();
 
@@ -34,17 +43,17 @@ const RamenCard: React.FC<RamenCardProps> = ({ ramen }) => {
         </div>
 
         {/* Spice Indicator */}
-        {ramen.category === 'Specialty' && (
+        {ramen.category === 'Spesial' && (
           <div className="absolute top-3 right-3 flex items-center gap-1 px-2 py-1 rounded-full bg-ramen-red/90 backdrop-blur-sm">
             <Flame className="w-3 h-3 text-primary-foreground" />
-            <span className="text-xs font-medium text-primary-foreground">Spicy</span>
+            <span className="text-xs font-medium text-primary-foreground">Pedas</span>
           </div>
         )}
 
         {/* Price Tag */}
         <div className="absolute bottom-3 right-3">
-          <span className="px-3 py-1.5 rounded-lg text-lg font-bold gradient-warm text-primary-foreground shadow-warm">
-            ${ramen.price.toFixed(2)}
+          <span className="px-3 py-1.5 rounded-lg text-sm font-bold gradient-warm text-primary-foreground shadow-warm">
+            {formatRupiah(ramen.price)}
           </span>
         </div>
       </div>
@@ -70,7 +79,7 @@ const RamenCard: React.FC<RamenCardProps> = ({ ramen }) => {
           ))}
           {ramen.toppings.length > 3 && (
             <span className="px-2 py-0.5 text-xs rounded-full bg-muted text-muted-foreground">
-              +{ramen.toppings.length - 3} more
+              +{ramen.toppings.length - 3} lainnya
             </span>
           )}
         </div>
@@ -82,7 +91,7 @@ const RamenCard: React.FC<RamenCardProps> = ({ ramen }) => {
           onClick={handleOrder}
         >
           <ShoppingCart className="w-4 h-4 mr-2" />
-          Order Now
+          Pesan Sekarang
         </Button>
       </div>
     </div>

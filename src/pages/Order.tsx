@@ -20,6 +20,15 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+const formatRupiah = (amount: number) => {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amount);
+};
+
 const Order: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -45,9 +54,9 @@ const Order: React.FC = () => {
       <div className="min-h-screen bg-background">
         <Navbar />
         <div className="container mx-auto px-4 py-20 text-center">
-          <h1 className="text-2xl font-bold text-foreground mb-4">Ramen not found</h1>
+          <h1 className="text-2xl font-bold text-foreground mb-4">Ramen tidak ditemukan</h1>
           <Link to="/">
-            <Button variant="warm">Back to Menu</Button>
+            <Button variant="warm">Kembali ke Menu</Button>
           </Link>
         </div>
       </div>
@@ -84,8 +93,8 @@ const Order: React.FC = () => {
     });
 
     toast({
-      title: 'Added to cart!',
-      description: `${quantity}x ${ramen.name} has been added to your cart.`,
+      title: 'Ditambahkan ke keranjang!',
+      description: `${quantity}x ${ramen.name} telah ditambahkan ke keranjang Anda.`,
     });
 
     navigate('/payment');
@@ -99,7 +108,7 @@ const Order: React.FC = () => {
         {/* Back Button */}
         <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8">
           <ArrowLeft className="w-4 h-4" />
-          Back to Menu
+          Kembali ke Menu
         </Link>
 
         <div className="grid lg:grid-cols-2 gap-12">
@@ -130,14 +139,14 @@ const Order: React.FC = () => {
               <p className="text-lg text-muted-foreground">{ramen.description}</p>
               <div className="mt-4">
                 <span className="text-3xl font-bold text-gradient-warm">
-                  ${ramen.price.toFixed(2)}
+                  {formatRupiah(ramen.price)}
                 </span>
               </div>
             </div>
 
             {/* Quantity */}
             <div className="space-y-3">
-              <Label className="text-base font-semibold">Quantity</Label>
+              <Label className="text-base font-semibold">Jumlah</Label>
               <div className="flex items-center gap-4">
                 <Button
                   variant="outline"
@@ -162,7 +171,7 @@ const Order: React.FC = () => {
             <div className="space-y-3">
               <Label className="text-base font-semibold flex items-center gap-2">
                 <Flame className="w-4 h-4 text-primary" />
-                Spice Level
+                Level Pedas
               </Label>
               <div className="flex flex-wrap gap-2">
                 {ramen.spiceLevels.map((level) => (
@@ -182,7 +191,7 @@ const Order: React.FC = () => {
             <div className="space-y-3">
               <Label className="text-base font-semibold flex items-center gap-2">
                 <ChefHat className="w-4 h-4 text-primary" />
-                Extra Toppings
+                Topping Tambahan
               </Label>
               <div className="grid grid-cols-2 gap-3">
                 {ramen.toppings.map((topping) => (
@@ -202,7 +211,7 @@ const Order: React.FC = () => {
                       />
                       <span className="font-medium">{topping.name}</span>
                     </div>
-                    <span className="text-primary font-semibold">+${topping.price.toFixed(2)}</span>
+                    <span className="text-primary font-semibold">+{formatRupiah(topping.price)}</span>
                   </div>
                 ))}
               </div>
@@ -211,11 +220,11 @@ const Order: React.FC = () => {
             {/* Special Notes */}
             <div className="space-y-3">
               <Label htmlFor="notes" className="text-base font-semibold">
-                Special Instructions (Optional)
+                Catatan Khusus (Opsional)
               </Label>
               <Textarea
                 id="notes"
-                placeholder="Any allergies or special requests..."
+                placeholder="Alergi atau permintaan khusus..."
                 value={specialNotes}
                 onChange={(e) => setSpecialNotes(e.target.value)}
                 className="min-h-[100px]"
@@ -227,7 +236,7 @@ const Order: React.FC = () => {
               <div className="flex items-center justify-between mb-4">
                 <span className="text-lg font-medium text-muted-foreground">Total</span>
                 <span className="text-3xl font-bold text-gradient-warm">
-                  ${calculateTotal().toFixed(2)}
+                  {formatRupiah(calculateTotal())}
                 </span>
               </div>
               <Button
@@ -237,7 +246,7 @@ const Order: React.FC = () => {
                 onClick={handleAddToCart}
               >
                 <ShoppingBag className="w-5 h-5 mr-2" />
-                {isAuthenticated ? 'Proceed to Payment' : 'Login to Order'}
+                {isAuthenticated ? 'Lanjut ke Pembayaran' : 'Masuk untuk Pesan'}
               </Button>
             </div>
           </div>
