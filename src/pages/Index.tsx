@@ -6,9 +6,9 @@ import { menuItems, categories } from '@/data/menuData';
 import { Button } from '@/components/ui/button';
 
 const Index: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState('All');
+  const [activeCategory, setActiveCategory] = useState('Semua');
 
-  const filteredItems = activeCategory === 'All' 
+  const filteredItems = activeCategory === 'Semua' 
     ? menuItems 
     : menuItems.filter(item => item.category === activeCategory);
 
@@ -23,14 +23,14 @@ const Index: React.FC = () => {
           {/* Section Header */}
           <div className="text-center mb-12 animate-fade-in">
             <span className="text-primary font-medium text-sm uppercase tracking-wider">
-              Our Selection
+              Pilihan Kami
             </span>
             <h2 className="text-4xl md:text-5xl font-bold mt-2 mb-4">
-              <span className="text-foreground">Explore Our </span>
+              <span className="text-foreground">Jelajahi </span>
               <span className="text-gradient-warm">Menu</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Each bowl is crafted with care, using traditional recipes and the freshest ingredients
+              Setiap mangkuk dibuat dengan penuh perhatian, menggunakan resep tradisional dan bahan-bahan segar pilihan
             </p>
           </div>
 
@@ -69,13 +69,13 @@ const Index: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="text-center md:text-left">
-              <h3 className="text-xl font-bold text-gradient-warm">Ramen House</h3>
+              <h3 className="text-xl font-bold text-gradient-warm">Rumah Ramen</h3>
               <p className="text-muted-foreground text-sm mt-1">
-                Authentic Japanese Ramen, Delivered Fresh
+                Ramen Jepang Autentik, Diantar Segar
               </p>
             </div>
             <div className="text-sm text-muted-foreground">
-              © 2024 Ramen House. All rights reserved.
+              © 2024 Rumah Ramen. Hak cipta dilindungi.
             </div>
           </div>
         </div>

@@ -14,12 +14,22 @@ import {
   Truck
 } from 'lucide-react';
 import { format } from 'date-fns';
+import { id } from 'date-fns/locale';
+
+const formatRupiah = (amount: number) => {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amount);
+};
 
 const statusConfig = {
-  pending: { icon: Clock, color: 'text-yellow-600', bg: 'bg-yellow-100', label: 'Pending' },
-  processing: { icon: Package, color: 'text-blue-600', bg: 'bg-blue-100', label: 'Processing' },
-  completed: { icon: Truck, color: 'text-green-600', bg: 'bg-green-100', label: 'Out for Delivery' },
-  delivered: { icon: CheckCircle2, color: 'text-primary', bg: 'bg-primary/10', label: 'Delivered' },
+  pending: { icon: Clock, color: 'text-yellow-600', bg: 'bg-yellow-100', label: 'Menunggu' },
+  processing: { icon: Package, color: 'text-blue-600', bg: 'bg-blue-100', label: 'Diproses' },
+  completed: { icon: Truck, color: 'text-green-600', bg: 'bg-green-100', label: 'Dikirim' },
+  delivered: { icon: CheckCircle2, color: 'text-primary', bg: 'bg-primary/10', label: 'Diterima' },
 };
 
 const History: React.FC = () => {
@@ -41,10 +51,10 @@ const History: React.FC = () => {
         <div className="mb-8 animate-fade-in">
           <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-4">
             <ArrowLeft className="w-4 h-4" />
-            Back to Menu
+            Kembali ke Menu
           </Link>
-          <h1 className="text-3xl font-bold text-foreground">Order History</h1>
-          <p className="text-muted-foreground">View all your past orders</p>
+          <h1 className="text-3xl font-bold text-foreground">Riwayat Pesanan</h1>
+          <p className="text-muted-foreground">Lihat semua pesanan Anda sebelumnya</p>
         </div>
 
         {orders.length === 0 ? (
@@ -52,12 +62,12 @@ const History: React.FC = () => {
             <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center mx-auto mb-6">
               <ShoppingBag className="w-10 h-10 text-muted-foreground" />
             </div>
-            <h2 className="text-xl font-semibold text-foreground mb-2">No orders yet</h2>
+            <h2 className="text-xl font-semibold text-foreground mb-2">Belum ada pesanan</h2>
             <p className="text-muted-foreground mb-8">
-              When you place an order, it will appear here.
+              Ketika Anda melakukan pemesanan, pesanan akan muncul di sini.
             </p>
             <Link to="/">
-              <Button variant="warm">Start Ordering</Button>
+              <Button variant="warm">Mulai Pesan</Button>
             </Link>
           </div>
         ) : (
@@ -78,11 +88,11 @@ const History: React.FC = () => {
                       <div className="flex items-center gap-2 text-muted-foreground">
                         <Calendar className="w-4 h-4" />
                         <span className="text-sm">
-                          {format(new Date(order.createdAt), 'MMM dd, yyyy • h:mm a')}
+                          {format(new Date(order.createdAt), 'dd MMM yyyy • HH:mm', { locale: id })}
                         </span>
                       </div>
                       <span className="text-sm text-muted-foreground">
-                        Order #{order.id.slice(0, 8).toUpperCase()}
+                        Pesanan #{order.id.slice(0, 8).toUpperCase()}
                       </span>
                     </div>
                     <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full ${status.bg}`}>
@@ -116,7 +126,7 @@ const History: React.FC = () => {
                                 </p>
                               )}
                             </div>
-                            <span className="font-semibold text-foreground">${itemTotal.toFixed(2)}</span>
+                            <span className="font-semibold text-foreground">{formatRupiah(itemTotal)}</span>
                           </div>
                         );
                       })}
@@ -125,12 +135,12 @@ const History: React.FC = () => {
                     {/* Order Footer */}
                     <div className="flex flex-wrap items-center justify-between gap-4 mt-6 pt-4 border-t border-border">
                       <div className="text-sm text-muted-foreground">
-                        Payment: {order.paymentMethod}
+                        Pembayaran: {order.paymentMethod}
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="text-muted-foreground">Total:</span>
                         <span className="text-xl font-bold text-gradient-warm">
-                          ${order.totalPrice.toFixed(2)}
+                          {formatRupiah(order.totalPrice)}
                         </span>
                       </div>
                     </div>
