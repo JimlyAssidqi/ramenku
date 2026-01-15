@@ -1,0 +1,96 @@
+import { RamenItem } from '@/types/ramen';
+
+export const menuItems: RamenItem[] = [
+  {
+    id: '1',
+    name: 'Tonkotsu Ramen',
+    description: 'Rich, creamy pork bone broth with chashu, soft-boiled egg, and bamboo shoots',
+    price: 14.99,
+    image: '/ramen-tonkotsu.jpg',
+    category: 'Classic',
+    spiceLevels: ['Mild', 'Medium', 'Hot', 'Extra Hot'],
+    toppings: [
+      { id: 't1', name: 'Extra Chashu', price: 3.00 },
+      { id: 't2', name: 'Soft-boiled Egg', price: 2.00 },
+      { id: 't3', name: 'Nori (Seaweed)', price: 1.00 },
+      { id: 't4', name: 'Corn', price: 1.50 },
+    ],
+  },
+  {
+    id: '2',
+    name: 'Shoyu Ramen',
+    description: 'Classic soy sauce-based broth with tender chicken, green onions, and menma',
+    price: 12.99,
+    image: '/ramen-shoyu.jpg',
+    category: 'Classic',
+    spiceLevels: ['Mild', 'Medium', 'Hot', 'Extra Hot'],
+    toppings: [
+      { id: 't1', name: 'Extra Chicken', price: 3.00 },
+      { id: 't2', name: 'Soft-boiled Egg', price: 2.00 },
+      { id: 't5', name: 'Green Onions', price: 0.75 },
+      { id: 't6', name: 'Mushrooms', price: 1.50 },
+    ],
+  },
+  {
+    id: '3',
+    name: 'Miso Ramen',
+    description: 'Hearty fermented soybean broth with ground pork, bean sprouts, and butter',
+    price: 13.99,
+    image: '/ramen-miso.jpg',
+    category: 'Classic',
+    spiceLevels: ['Mild', 'Medium', 'Hot', 'Extra Hot'],
+    toppings: [
+      { id: 't1', name: 'Extra Pork', price: 3.00 },
+      { id: 't2', name: 'Soft-boiled Egg', price: 2.00 },
+      { id: 't7', name: 'Butter', price: 1.00 },
+      { id: 't4', name: 'Corn', price: 1.50 },
+    ],
+  },
+  {
+    id: '4',
+    name: 'Spicy Tantanmen',
+    description: 'Fiery sesame-based broth with minced pork, bok choy, and chili oil',
+    price: 15.99,
+    image: '/ramen-spicy.jpg',
+    category: 'Specialty',
+    spiceLevels: ['Medium', 'Hot', 'Extra Hot', 'Inferno'],
+    toppings: [
+      { id: 't1', name: 'Extra Pork', price: 3.00 },
+      { id: 't2', name: 'Soft-boiled Egg', price: 2.00 },
+      { id: 't8', name: 'Extra Bok Choy', price: 1.25 },
+      { id: 't9', name: 'Extra Chili Oil', price: 0.50 },
+    ],
+  },
+  {
+    id: '5',
+    name: 'Veggie Delight',
+    description: 'Rich vegetable broth with tofu, seasonal vegetables, and shiitake mushrooms',
+    price: 12.49,
+    image: '/ramen-veggie.jpg',
+    category: 'Vegetarian',
+    spiceLevels: ['Mild', 'Medium', 'Hot'],
+    toppings: [
+      { id: 't10', name: 'Extra Tofu', price: 2.50 },
+      { id: 't6', name: 'Mushrooms', price: 1.50 },
+      { id: 't11', name: 'Avocado', price: 2.00 },
+      { id: 't3', name: 'Nori (Seaweed)', price: 1.00 },
+    ],
+  },
+  {
+    id: '6',
+    name: 'Black Garlic Ramen',
+    description: 'Aromatic black garlic oil infused tonkotsu with crispy garlic chips',
+    price: 16.99,
+    image: '/ramen-black-garlic.jpg',
+    category: 'Specialty',
+    spiceLevels: ['Mild', 'Medium', 'Hot'],
+    toppings: [
+      { id: 't1', name: 'Extra Chashu', price: 3.00 },
+      { id: 't2', name: 'Soft-boiled Egg', price: 2.00 },
+      { id: 't12', name: 'Extra Garlic Chips', price: 1.00 },
+      { id: 't3', name: 'Nori (Seaweed)', price: 1.00 },
+    ],
+  },
+];
+
+export const categories = ['All', 'Classic', 'Specialty', 'Vegetarian'];
