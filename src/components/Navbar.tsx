@@ -13,7 +13,7 @@ const Navbar: React.FC = () => {
 
   const navLinks = [
     { path: '/', label: 'Menu', icon: Soup },
-    { path: '/history', label: 'Pesanan', icon: History },
+    ...(!isAdmin ? [{ path: '/history', label: 'Pesanan', icon: History }] : []),
     ...(isAdmin ? [{ path: '/admin', label: 'Dashboard', icon: LayoutDashboard }] : []),
   ];
 
