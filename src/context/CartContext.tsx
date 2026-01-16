@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { CartItem, Order } from '@/types/ramen';
+import { useAuth } from '@/context/AuthContext';
 
 interface CartContextType {
   cartItems: CartItem[];
@@ -9,6 +10,7 @@ interface CartContextType {
   clearCart: () => void;
   getTotalPrice: () => number;
   addOrder: (order: Order) => void;
+  getUserOrders: () => Order[];
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -37,7 +39,18 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const addOrder = (order: Order) => {
+    // Save order to localStorage for persistence
+    const userOrdersKey = `ramen-orders-${order.userId}`;
+    const existingOrders = JSON.parse(localStorage.getItem(userOrdersKey) || '[]');
+    const updatedOrders = [order, ...existingOrders];
+    localStorage.setItem(userOrdersKey, JSON.stringify(updatedOrders));
+    
     setOrders((prev) => [order, ...prev]);
+  };
+
+  const getUserOrders = (): Order[] => {
+    // This will be called with userId from component
+    return orders;
   };
 
   return (
@@ -50,6 +63,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         clearCart,
         getTotalPrice,
         addOrder,
+        getUserOrders,
       }}
     >
       {children}
