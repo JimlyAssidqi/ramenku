@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
-import { useCart } from '@/context/CartContext';
+import { Order } from '@/types/ramen';
 import { 
   ArrowLeft, 
   Calendar, 
@@ -11,7 +11,8 @@ import {
   ShoppingBag,
   CheckCircle2,
   Clock,
-  Truck
+  Truck,
+  ChefHat
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
@@ -26,19 +27,31 @@ const formatRupiah = (amount: number) => {
 };
 
 const statusConfig = {
-  pending: { icon: Clock, color: 'text-yellow-600', bg: 'bg-yellow-100', label: 'Menunggu' },
-  processing: { icon: Package, color: 'text-blue-600', bg: 'bg-blue-100', label: 'Diproses' },
-  completed: { icon: Truck, color: 'text-green-600', bg: 'bg-green-100', label: 'Dikirim' },
-  delivered: { icon: CheckCircle2, color: 'text-primary', bg: 'bg-primary/10', label: 'Diterima' },
+  pending: { icon: Clock, color: 'text-yellow-600', bg: 'bg-yellow-100', label: 'Menunggu Konfirmasi' },
+  confirmed: { icon: CheckCircle2, color: 'text-blue-600', bg: 'bg-blue-100', label: 'Dikonfirmasi' },
+  processing: { icon: ChefHat, color: 'text-purple-600', bg: 'bg-purple-100', label: 'Diproses' },
+  completed: { icon: Package, color: 'text-green-600', bg: 'bg-green-100', label: 'Selesai' },
+  delivered: { icon: Truck, color: 'text-primary', bg: 'bg-primary/10', label: 'Dikirim' },
 };
 
 const History: React.FC = () => {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
-  const { orders } = useCart();
+  const { isAuthenticated, user } = useAuth();
+  const [orders, setOrders] = useState<Order[]>([]);
+
+  useEffect(() => {
+    if (!isAuthenticated || !user) {
+      navigate('/auth', { state: { from: '/history' } });
+      return;
+    }
+    
+    // Load orders from localStorage
+    const userOrdersKey = `ramen-orders-${user.id}`;
+    const storedOrders = JSON.parse(localStorage.getItem(userOrdersKey) || '[]');
+    setOrders(storedOrders);
+  }, [isAuthenticated, user, navigate]);
 
   if (!isAuthenticated) {
-    navigate('/auth', { state: { from: '/history' } });
     return null;
   }
 
@@ -74,7 +87,7 @@ const History: React.FC = () => {
           <div className="space-y-6">
             {orders.map((order, index) => {
               const status = statusConfig[order.status];
-              const StatusIcon = status.icon;
+              const StatusIcon = status?.icon || Clock;
 
               return (
                 <div
@@ -95,9 +108,11 @@ const History: React.FC = () => {
                         Pesanan #{order.id.slice(0, 8).toUpperCase()}
                       </span>
                     </div>
-                    <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full ${status.bg}`}>
-                      <StatusIcon className={`w-4 h-4 ${status.color}`} />
-                      <span className={`text-sm font-medium ${status.color}`}>{status.label}</span>
+                    <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full ${status?.bg || 'bg-muted'}`}>
+                      <StatusIcon className={`w-4 h-4 ${status?.color || 'text-muted-foreground'}`} />
+                      <span className={`text-sm font-medium ${status?.color || 'text-muted-foreground'}`}>
+                        {status?.label || order.status}
+                      </span>
                     </div>
                   </div>
 

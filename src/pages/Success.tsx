@@ -123,9 +123,10 @@ const Success: React.FC = () => {
               <div>
                 <h3 className="font-semibold text-foreground mb-1">Status Pesanan</h3>
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                  <span className="text-muted-foreground capitalize">
-                    {order.status === 'processing' ? 'Sedang diproses' : order.status}
+                  <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse" />
+                  <span className="text-muted-foreground">
+                    {order.status === 'pending' ? 'Menunggu konfirmasi admin' : 
+                     order.status === 'processing' ? 'Sedang diproses' : order.status}
                   </span>
                 </div>
               </div>

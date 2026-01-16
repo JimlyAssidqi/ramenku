@@ -32,7 +32,7 @@ const paymentMethods = [
 
 const Payment: React.FC = () => {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const { cartItems, getTotalPrice, clearCart, addOrder, removeFromCart } = useCart();
   const { toast } = useToast();
   const [selectedPayment, setSelectedPayment] = useState('');
@@ -75,10 +75,12 @@ const Payment: React.FC = () => {
 
     const order = {
       id: crypto.randomUUID(),
+      userId: user?.id || '',
+      userName: user?.name || '',
       items: cartItems,
       totalPrice: getTotalPrice(),
       paymentMethod: paymentMethods.find((m) => m.id === selectedPayment)?.name || '',
-      status: 'processing' as const,
+      status: 'pending' as const,
       createdAt: new Date(),
     };
 

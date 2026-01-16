@@ -25,10 +25,12 @@ export interface CartItem {
 
 export interface Order {
   id: string;
+  userId: string;
+  userName: string;
   items: CartItem[];
   totalPrice: number;
   paymentMethod: string;
-  status: 'pending' | 'processing' | 'completed' | 'delivered';
+  status: 'pending' | 'confirmed' | 'processing' | 'completed' | 'delivered';
   createdAt: Date;
 }
 
@@ -36,4 +38,9 @@ export interface User {
   id: string;
   name: string;
   email: string;
+  role: 'user' | 'admin';
+}
+
+export interface RegisteredUser extends User {
+  password: string;
 }

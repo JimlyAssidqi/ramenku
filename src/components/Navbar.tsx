@@ -3,10 +3,10 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
-import { ShoppingBag, User, Menu, X, History, Soup } from 'lucide-react';
+import { ShoppingBag, User, Menu, X, History, Soup, LayoutDashboard } from 'lucide-react';
 
 const Navbar: React.FC = () => {
-  const { isAuthenticated, user, logout } = useAuth();
+  const { isAuthenticated, isAdmin, user, logout } = useAuth();
   const { cartItems } = useCart();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -14,6 +14,7 @@ const Navbar: React.FC = () => {
   const navLinks = [
     { path: '/', label: 'Menu', icon: Soup },
     { path: '/history', label: 'Pesanan', icon: History },
+    ...(isAdmin ? [{ path: '/admin', label: 'Dashboard', icon: LayoutDashboard }] : []),
   ];
 
   const isActive = (path: string) => location.pathname === path;

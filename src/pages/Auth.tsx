@@ -56,17 +56,17 @@ const Auth: React.FC = () => {
           return;
         }
 
-        const success = await login(formData.email, formData.password);
-        if (success) {
+        const loginResult = await login(formData.email, formData.password);
+        if (loginResult.success) {
           toast({
             title: 'Selamat datang kembali!',
-            description: 'Anda berhasil masuk.',
+            description: loginResult.message,
           });
           navigate(from, { replace: true });
         } else {
           toast({
             title: 'Gagal masuk',
-            description: 'Periksa kredensial Anda dan coba lagi.',
+            description: loginResult.message,
             variant: 'destructive',
           });
         }
@@ -82,17 +82,17 @@ const Auth: React.FC = () => {
           return;
         }
 
-        const success = await register(formData.name, formData.email, formData.password);
-        if (success) {
+        const registerResult = await register(formData.name, formData.email, formData.password);
+        if (registerResult.success) {
           toast({
             title: 'Akun berhasil dibuat!',
-            description: 'Selamat datang di Rumah Ramen.',
+            description: registerResult.message,
           });
           navigate(from, { replace: true });
         } else {
           toast({
             title: 'Pendaftaran gagal',
-            description: 'Silakan coba lagi dengan kredensial yang berbeda.',
+            description: registerResult.message,
             variant: 'destructive',
           });
         }
