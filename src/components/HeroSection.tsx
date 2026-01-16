@@ -50,12 +50,12 @@ const HeroSection: React.FC = () => {
                 <Soup className="w-5 h-5 mr-2 group-hover:animate-pulse" />
                 Lihat Menu
               </Button>
-              <Button 
+              {/* <Button 
                 variant="outline" 
                 size="xl"
               >
                 Cerita Kami
-              </Button>
+              </Button> */}
             </div>
 
             {/* Stats */}
